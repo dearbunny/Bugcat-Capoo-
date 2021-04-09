@@ -13,7 +13,7 @@ struct DrawView: UIViewRepresentable {
         //描圖參考
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 330, height: 210))
         imageView.image = UIImage(named: "貓貓蟲咖波")
-        imageView.alpha = 0.4
+        imageView.alpha = 0.0
         view.addSubview(imageView)
         
         // 曲線咖波
@@ -56,6 +56,7 @@ struct DrawView: UIViewRepresentable {
         //capooLayer.fillColor = UIColor.clear.cgColor // 繪製完成前暫時不填色
         capooLayer.strokeColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
         capooLayer.lineWidth = 5
+        capooLayer.lineCap = .round
         view.layer.addSublayer(capooLayer)
         
         // 白色肚子
@@ -86,7 +87,10 @@ struct DrawView: UIViewRepresentable {
         //capooLayer.fillColor = UIColor.clear.cgColor
         rightLetLayer.strokeColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
         rightLetLayer.lineWidth = 5
+        rightLetLayer.lineCap = .round
         view.layer.addSublayer(rightLetLayer)
+        
+        
         
         //嘴紅口
         let pathMouth = UIBezierPath()
@@ -107,6 +111,24 @@ struct DrawView: UIViewRepresentable {
         mouthLayer.lineWidth = 5
         view.layer.addSublayer(mouthLayer)
         
+        // 草地
+        let scarletPath = UIBezierPath()
+        scarletPath.move(to: CGPoint(x: 10, y: 170))
+        scarletPath.addQuadCurve(to: CGPoint(x: 65, y: 173), controlPoint: CGPoint(x: 38, y: 171))
+        scarletPath.addQuadCurve(to: CGPoint(x: 84, y: 172), controlPoint: CGPoint(x: 79, y: 161))
+        scarletPath.addQuadCurve(to: CGPoint(x: 98, y: 172), controlPoint: CGPoint(x: 92, y: 173))
+        scarletPath.addQuadCurve(to: CGPoint(x: 168, y: 173), controlPoint: CGPoint(x: 130, y: 172))
+        scarletPath.addQuadCurve(to: CGPoint(x: 229, y: 172), controlPoint: CGPoint(x: 201, y: 173))
+        scarletPath.addQuadCurve(to: CGPoint(x: 244, y: 172), controlPoint: CGPoint(x: 237, y: 173))
+        scarletPath.addQuadCurve(to: CGPoint(x: 281, y: 172), controlPoint: CGPoint(x: 258, y: 174))
+        scarletPath.addQuadCurve(to: CGPoint(x: 277, y: 180), controlPoint: CGPoint(x: 281, y: 178))
+        scarletPath.addQuadCurve(to: CGPoint(x: 211, y: 189), controlPoint: CGPoint(x: 247, y: 186))
+        scarletPath.addQuadCurve(to: CGPoint(x: 92, y: 188), controlPoint: CGPoint(x: 151, y: 191))
+        scarletPath.addQuadCurve(to: CGPoint(x: 10, y: 170), controlPoint: CGPoint(x: 40, y: 186))
+        let scarletLayer = CAShapeLayer()
+        scarletLayer.path = scarletPath.cgPath
+        scarletLayer.fillColor = CGColor(srgbRed: 157/255, green: 225/255, blue: 138/255, alpha: 1)
+        view.layer.addSublayer(scarletLayer)
         
         // 黑線
         // 上嘴線
@@ -122,13 +144,55 @@ struct DrawView: UIViewRepresentable {
         pathMouthLine.addQuadCurve(to: CGPoint(x: 288, y: 154), controlPoint: CGPoint(x: 292, y: 144))
         pathMouthLine.move(to: CGPoint(x: 307, y: 139))
         pathMouthLine.addQuadCurve(to: CGPoint(x: 310, y: 157), controlPoint: CGPoint(x: 315, y: 147))
+        
+        // 地平線
+        pathMouthLine.move(to: CGPoint(x: 10, y: 170))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 65, y: 173), controlPoint: CGPoint(x: 38, y: 171))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 84, y: 172), controlPoint: CGPoint(x: 79, y: 161))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 98, y: 172), controlPoint: CGPoint(x: 92, y: 173))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 168, y: 173), controlPoint: CGPoint(x: 130, y: 172))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 229, y: 172), controlPoint: CGPoint(x: 201, y: 173))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 244, y: 172), controlPoint: CGPoint(x: 237, y: 173))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 289, y: 172), controlPoint: CGPoint(x: 258, y: 174))
+        pathMouthLine.addQuadCurve(to: CGPoint(x: 310, y: 173), controlPoint: CGPoint(x: 300, y: 173))
+        
+        // 音符波浪
+        pathMouthLine.move(to: CGPoint(x: 82, y: 50))
+        pathMouthLine.addCurve(to: CGPoint(x: 106, y: 48), controlPoint1: CGPoint(x: 91, y: 60), controlPoint2: CGPoint(x: 94, y: 41))
+        
+        
+        
         // 填黑線
         let blackLineLayer = CAShapeLayer()
         blackLineLayer.path = pathMouthLine.cgPath
         blackLineLayer.fillColor = UIColor.clear.cgColor
         blackLineLayer.strokeColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
         blackLineLayer.lineWidth = 5
+        blackLineLayer.lineCap = .round
         view.layer.addSublayer(blackLineLayer)
+        
+        //豆芽
+        let pointPath = UIBezierPath()
+        pointPath.move(to: CGPoint(x: 51, y: 68))
+        pointPath.addQuadCurve(to: CGPoint(x: 58, y: 71), controlPoint: CGPoint(x: 60, y: 60))
+        pointPath.addQuadCurve(to: CGPoint(x: 51, y: 74), controlPoint: CGPoint(x: 54, y: 75))
+        pointPath.addQuadCurve(to: CGPoint(x: 51, y: 68), controlPoint: CGPoint(x: 48, y: 71))
+        pointPath.close()
+        
+        pointPath.move(to: CGPoint(x: 68, y: 63))
+        pointPath.addQuadCurve(to: CGPoint(x: 75, y: 65), controlPoint: CGPoint(x: 75, y: 58))
+        pointPath.addQuadCurve(to: CGPoint(x: 71, y: 69), controlPoint: CGPoint(x: 73, y: 69))
+        pointPath.addQuadCurve(to: CGPoint(x: 68, y: 63), controlPoint: CGPoint(x: 64, y: 70))
+        pointPath.close()
+        // 填黑線
+        let pointLayer = CAShapeLayer()
+        pointLayer.path = pointPath.cgPath
+        pointLayer.fillColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
+        pointLayer.strokeColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
+        pointLayer.lineWidth = 3
+        pointLayer.lineCap = .round
+        view.layer.addSublayer(pointLayer)
+
         
         
         
@@ -157,6 +221,27 @@ struct DrawView: UIViewRepresentable {
         backLayer.path = backPath.cgPath
         backLayer.fillColor = CGColor(srgbRed: 96/255, green: 166/255, blue: 191/255, alpha: 1)
         view.layer.addSublayer(backLayer)
+        
+        
+        
+        // 音符ㄇ字型
+        let musicPath = UIBezierPath()
+        musicPath.move(to: CGPoint(x: 57, y: 65))
+        musicPath.addLine(to: CGPoint(x: 55, y: 52))
+        musicPath.addLine(to: CGPoint(x: 71, y: 48))
+        musicPath.addLine(to: CGPoint(x: 73, y: 59))
+        
+        // 黑色填色
+        let musicLayer = CAShapeLayer()
+        musicLayer.path = musicPath.cgPath
+        musicLayer.fillColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
+        musicLayer.fillColor = UIColor.clear.cgColor // 繪製完成前暫時不填色
+        musicLayer.strokeColor = CGColor(srgbRed: 90/255, green: 80/255, blue: 94/255, alpha: 1)
+        musicLayer.lineWidth = 4
+        musicLayer.lineCap = .round
+        view.layer.addSublayer(musicLayer)
+       
+        
         
     
         return view
